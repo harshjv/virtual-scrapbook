@@ -1,0 +1,75 @@
+Virtual Scrapbook is a multi-touch based image and video viewer.
+
+# Introduction #
+
+Virtual Scrapbook is a multi-touch based image and video viewer.Users can move,zoom and rotate multiple images/videos simultaneously using multi-touch gestures.Touches are made when an Infra Red pen is moved on an acrylic glass slab. Detection is done using OpenCV.
+
+
+# Details #
+
+Virtual Scrapbook - A Multitouch Table
+
+
+Website - http://code.google.com/p/virtual-scrapbook/
+
+Introduction
+
+---
+
+
+The Virtual Scrapbook is a multi-touch interface created using PyMT.
+The front-end is created using PyMT,the detection is done using OpenCV and the calibration is done with the help of
+Octave API for C++
+
+Installation
+
+---
+
+
+The Virtual Scrapbook contains both the software and the hardware implementation.
+
+Hardware
+
+---
+
+
+An acrylic board is placed on a metal frame and acts as the table.The InfraRed pen is dragged across the acrylic board
+and this helps to register the touches.The camera captures the co-ordinates from underneath the acrylic board using
+OpenCV and sends them to PyMT using TUIO protocol.
+
+Software
+
+---
+
+
+Front-End - PyMT (python library)
+Detection - OpenCV (C++)
+Calibration - Octave API for C++ (C++) with GUI created using Qt4
+Communication - TUIO (C++)
+
+PyMT can be downloaded from http://pymt.eu/wiki/DevGuide/GrabSourceCode
+> python setup.py install
+
+OpenCV can be downloaded from http://opencv.willowgarage.com/wiki/
+
+Octave API for C++ is available at http://octave.sourceforge.net/doxygen/html/
+
+TUIO can be found at http://www.tuio.org/?software
+The link to the C++ API is as follows
+http://sourceforge.net/projects/reactivision/files/TUIO%201.0/TUIO-Clients%201.4/TUIO_CPP-1.4.zip/download
+
+Compiling Calibration
+
+---
+
+
+make test
+g++ -o test TUIO/TuioClient.o TUIO/TuioServer.o TUIO/TuioTime.o oscpack/osc/OscTypes.o oscpack/osc/OscOutboundPacketStream.o oscpack/osc/OscReceivedElements.o oscpack/osc/OscPrintReceivedElements.o oscpack/ip/posix/NetworkingUtils.o oscpack/ip/posix/UdpSocket.o test.o -L/usr/lib -lSDL -lGL -lGLU -lglut -I/usr/local/include/opencv -I/usr/local/include  -L/usr/local/lib -lopencv\_core -lopencv\_imgproc -lopencv\_highgui -lopencv\_ml -lopencv\_video -lopencv\_features2d -lopencv\_calib3d -lopencv\_objdetect -lopencv\_contrib -lopencv\_legacy -lopencv\_flann -lcvblob -lpthread
+mkoctfile --link-stand-alone -o calib calib.cpp
+
+Running Application
+
+---
+
+
+python mypro.py -a
